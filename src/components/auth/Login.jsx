@@ -22,7 +22,7 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`${process.env.BACKEND_URL}/login`, {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         email: email,
         password: password,
       });

@@ -15,7 +15,7 @@ const RepositoryDetails = () => {
         const fetchRepository = async () => {
             try {
                 const response = await fetch(
-                    `${process.env.BACKEND_URL}/repo/${id}`
+                    `${process.env.REACT_APP_BACKEND_URL}/repo/${id}`
                 );
                 if (!response.ok) {
                     throw new Error("Repository not found");

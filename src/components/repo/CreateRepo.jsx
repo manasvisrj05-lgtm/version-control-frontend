@@ -34,7 +34,7 @@ const CreateRepo = () => {
       setLoading(true);
 
       const response = await fetch(
-        `${process.env.BACKEND_URL}/repo/create`,
+        `${process.env.REACT_APP_BACKEND_URL}/repo/create`,
         {
           method: "POST",
           headers: {

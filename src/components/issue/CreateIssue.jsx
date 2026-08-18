@@ -36,7 +36,7 @@ const CreateIssue = () => {
       setLoading(true);
 
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/issue/create/${id}`,
+        `${process.env.VITE_BACKEND_URL}/issue/create/${id}`,
         {
           method: "POST",
 

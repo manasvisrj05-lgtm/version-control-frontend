@@ -22,7 +22,7 @@ const Dashboard = () => {
     const fetchRepositories = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/repo/user/${userId}`
+          `${process.env.VITE_BACKEND_URL}/repo/user/${userId}`
         );
 
         if (!response.ok) {
@@ -45,7 +45,7 @@ const Dashboard = () => {
     const fetchSuggestedRepositories = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/repo/all`
+          `${process.env.VITE_BACKEND_URL}/repo/all`
         );
 
         if (!response.ok) {
@@ -72,7 +72,7 @@ const Dashboard = () => {
     const fetchStarredRepositories = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/repo/starred/${userId}`
+          `${process.env.VITE_BACKEND_URL}/repo/starred/${userId}`
         );
 
         if (!response.ok) {
@@ -127,7 +127,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/repo/star`,
+        `${process.env.VITE_BACKEND_URL}/repo/star`,
         {
           method: "POST",
           headers: {

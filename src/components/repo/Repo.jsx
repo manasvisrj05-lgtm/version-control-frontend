@@ -35,7 +35,7 @@ const Repo = () => {
             }
             try {
             const response = await axios.get(
-                `${process.env.BACKEND_URL}/repo/starred/${userId}`
+                `${process.env.VITE_BACKEND_URL}/repo/starred/${userId}`
             );
             console.log("Starred repositories:", response.data);
             setRepositories(response.data.starRepos);

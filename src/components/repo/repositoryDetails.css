@@ -1,0 +1,106 @@
+/* ================================
+   Repository Details Page
+================================ */
+
+.repository-page {
+  min-height: calc(100vh - 120px);
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 40px 8%;
+}
+
+
+/* ================================
+   Repository Header
+================================ */
+
+.repository-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding-bottom: 30px;
+  border-bottom: 1px solid #30363d;
+}
+
+.repository-header h1 {
+  margin: 0 0 10px;
+
+  color: #58a6ff;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.repository-header p {
+  margin: 0 0 15px;
+
+  color: #8b949e;
+  font-size: 15px;
+}
+
+
+/* ================================
+   Visibility
+================================ */
+
+.repository-header span {
+  display: inline-block;
+
+  padding: 4px 10px;
+
+  border: 1px solid #30363d;
+  border-radius: 20px;
+
+  color: #8b949e;
+  font-size: 12px;
+}
+
+
+/* ================================
+   Issues Button
+================================ */
+
+.repository-header button {
+  padding: 8px 16px;
+
+  background: #21262d;
+  color: #e6edf3;
+
+  border: 1px solid #30363d;
+  border-radius: 6px;
+
+  font-size: 14px;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.repository-header button:hover {
+  background: #30363d;
+  border-color: #8b949e;
+}
+
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 700px) {
+
+  .repository-page {
+    padding: 30px 20px;
+  }
+
+  .repository-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .repository-header h1 {
+    font-size: 25px;
+  }
+
+  .repository-header button {
+    align-self: flex-start;
+  }
+}

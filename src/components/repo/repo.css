@@ -1,0 +1,169 @@
+
+.starred-repo-page {
+  min-height: calc(100vh - 120px);
+  background: #0d1117;
+  color: white;
+  padding: 45px 8%;
+}
+
+.starred-repo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.starred-repo-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
+}
+
+.starred-repo-header p {
+  margin-top: 8px;
+  color: #8b949e;
+  font-size: 15px;
+}
+
+.repo-count {
+  color: #8b949e;
+  font-size: 14px;
+}
+
+.repo-search {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 25px;
+  color: #8b949e;
+}
+
+.repo-search:focus-within {
+  border-color: #58a6ff;
+}
+
+.repo-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+}
+
+.repo-search input::placeholder {
+  color: #8b949e;
+}
+
+.repo-list {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.repo-card {
+  padding: 25px 5px;
+  border-top: 1px solid #30363d;
+}
+
+.repo-card:last-child {
+  border-bottom: 1px solid #30363d;
+}
+
+.repo-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.repo-name {
+  display: inline-block;
+  margin: 0 12px 0 0;
+  color: #58a6ff;
+  font-size: 21px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.repo-name:hover {
+  text-decoration: underline;
+}
+
+.repo-visibility {
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  padding: 3px 9px;
+  color: #8b949e;
+  font-size: 12px;
+}
+
+.repo-description {
+  color: #8b949e;
+  font-size: 14px;
+  margin: 12px 0 18px;
+  max-width: 700px;
+}
+
+.star-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: white;
+  padding: 7px 13px;
+  cursor: pointer;
+}
+
+.star-button:hover {
+  background: #30363d;
+}
+
+.starred-repo-info {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: #8b949e;
+  font-size: 13px;
+}
+
+.repo-language {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.language-dot {
+  width: 12px;
+  height: 12px;
+  background: #f1e05a;
+  border-radius: 50%;
+}
+
+.repo-stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.no-repos {
+  text-align: center;
+  padding: 80px 20px;
+  color: #8b949e;
+}
+
+.no-repos h2 {
+  color: white;
+  margin-top: 15px;
+}
+
+.no-repos p {
+  color: #8b949e;
+}

@@ -1,0 +1,810 @@
+/* =========================================
+   ISSUES PAGE
+========================================= */
+
+.issues-page {
+  min-height: 100vh;
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 40px 8%;
+}
+
+
+/* =========================================
+   TOP / BACK BUTTON
+========================================= */
+
+.issues-top {
+  margin-bottom: 25px;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.back-btn:hover {
+  color: #58a6ff;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.issues-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding-bottom: 28px;
+
+  border-bottom: 1px solid #30363d;
+}
+
+.issues-title-section {
+  max-width: 700px;
+}
+
+.issues-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.issues-header h1 {
+  margin: 0;
+
+  color: #f0f6fc;
+
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.issues-header p {
+  margin: 10px 0 0;
+
+  color: #8b949e;
+
+  font-size: 14px;
+}
+
+.issues-header strong {
+  color: #c9d1d9;
+}
+
+
+/* =========================================
+   VISIBILITY BADGE
+========================================= */
+
+.visibility-badge {
+  padding: 4px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+.visibility-badge.public {
+  color: #3fb950;
+
+  border: 1px solid #238636;
+
+  background: rgba(35, 134, 54, 0.1);
+}
+
+.visibility-badge.private {
+  color: #d29922;
+
+  border: 1px solid #9e6a03;
+
+  background: rgba(158, 106, 3, 0.1);
+}
+
+
+/* =========================================
+   NEW ISSUE BUTTON
+========================================= */
+
+.new-issue-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 16px;
+
+  border: 1px solid #2ea043;
+
+  border-radius: 6px;
+
+  background: #238636;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.new-issue-btn span {
+  font-size: 18px;
+  line-height: 12px;
+}
+
+.new-issue-btn:hover {
+  background: #2ea043;
+}
+
+
+/* =========================================
+   PRIVATE REPOSITORY MESSAGE
+========================================= */
+
+.private-message {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 25px;
+
+  padding: 18px 20px;
+
+  border: 1px solid #30363d;
+  border-radius: 8px;
+
+  background: #161b22;
+}
+
+.private-icon {
+  font-size: 22px;
+}
+
+.private-message h3 {
+  margin: 0 0 4px;
+
+  font-size: 15px;
+
+  color: #f0f6fc;
+}
+
+.private-message p {
+  margin: 0;
+
+  color: #8b949e;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   CREATE ISSUE FORM
+========================================= */
+
+.issue-form-wrapper {
+  max-width: 850px;
+
+  margin: 28px auto;
+}
+
+.issue-form {
+  padding: 28px;
+
+  background: #161b22;
+
+  border: 1px solid #30363d;
+
+  border-radius: 8px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   FORM HEADER
+========================================= */
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #30363d;
+}
+
+.form-header h2 {
+  margin: 0 0 6px;
+
+  color: #f0f6fc;
+
+  font-size: 20px;
+}
+
+.form-header p {
+  margin: 0;
+
+  color: #8b949e;
+
+  font-size: 13px;
+}
+
+.close-form-btn {
+  background: transparent;
+
+  border: none;
+
+  color: #8b949e;
+
+  font-size: 26px;
+
+  line-height: 20px;
+
+  cursor: pointer;
+}
+
+.close-form-btn:hover {
+  color: #f0f6fc;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 22px;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+
+  color: #f0f6fc;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.form-group small {
+  margin-top: 6px;
+
+  color: #6e7681;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px 13px;
+
+  border: 1px solid #30363d;
+
+  border-radius: 6px;
+
+  background: #0d1117;
+
+  color: #e6edf3;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.form-group input {
+  height: 42px;
+}
+
+.form-group textarea {
+  min-height: 180px;
+
+  resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #6e7681;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #58a6ff;
+
+  box-shadow: 0 0 0 3px rgba(56, 139, 253, 0.15);
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.issue-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 18px;
+
+  padding: 11px 14px;
+
+  border: 1px solid #f85149;
+
+  border-radius: 6px;
+
+  background: rgba(248, 81, 73, 0.08);
+
+  color: #f85149;
+
+  font-size: 13px;
+}
+
+.issue-error span {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 18px;
+  height: 18px;
+
+  border: 1px solid #f85149;
+
+  border-radius: 50%;
+
+  font-size: 11px;
+}
+
+.issue-error.standalone {
+  max-width: 850px;
+
+  margin: 20px auto;
+}
+
+
+/* =========================================
+   FORM ACTIONS
+========================================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 25px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #30363d;
+}
+
+.form-actions button {
+  padding: 8px 16px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.cancel-btn {
+  background: #21262d;
+
+  border: 1px solid #30363d;
+
+  color: #e6edf3;
+}
+
+.cancel-btn:hover {
+  background: #30363d;
+}
+
+.create-btn {
+  background: #238636;
+
+  border: 1px solid #2ea043;
+
+  color: #ffffff;
+}
+
+.create-btn:hover {
+  background: #2ea043;
+}
+
+.form-actions button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   ISSUES CONTAINER
+========================================= */
+
+.issues-container {
+  max-width: 1000px;
+
+  margin: 28px auto 0;
+}
+
+
+/* =========================================
+   LIST HEADER
+========================================= */
+
+.issues-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 18px;
+
+  border: 1px solid #30363d;
+
+  border-radius: 6px 6px 0 0;
+
+  background: #161b22;
+
+  color: #8b949e;
+
+  font-size: 13px;
+}
+
+.issues-list-header strong {
+  color: #f0f6fc;
+
+  font-size: 14px;
+}
+
+.issues-list-header span {
+  color: #3fb950;
+}
+
+
+/* =========================================
+   ISSUE ITEM
+========================================= */
+
+.issue-list {
+  border-left: 1px solid #30363d;
+  border-right: 1px solid #30363d;
+  border-bottom: 1px solid #30363d;
+
+  border-radius: 0 0 6px 6px;
+}
+
+.issue-item {
+  display: flex;
+  gap: 15px;
+
+  padding: 20px;
+
+  border-bottom: 1px solid #30363d;
+
+  transition: background 0.2s ease;
+}
+
+.issue-item:last-child {
+  border-bottom: none;
+}
+
+.issue-item:hover {
+  background: #161b22;
+}
+
+
+/* =========================================
+   ISSUE STATUS ICON
+========================================= */
+
+.issue-status-icon {
+  width: 25px;
+
+  flex-shrink: 0;
+
+  padding-top: 2px;
+
+  font-size: 14px;
+}
+
+.issue-status-icon.open {
+  color: #3fb950;
+}
+
+.issue-status-icon.closed {
+  color: #a371f7;
+}
+
+
+/* =========================================
+   ISSUE CONTENT
+========================================= */
+
+.issue-content {
+  min-width: 0;
+}
+
+.issue-content h3 {
+  margin: 0 0 7px;
+
+  color: #58a6ff;
+
+  font-size: 17px;
+
+  font-weight: 600;
+}
+
+.issue-content h3:hover {
+  text-decoration: underline;
+}
+
+.issue-content p {
+  margin: 0 0 10px;
+
+  color: #8b949e;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.issue-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #6e7681;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.no-issues {
+  padding: 75px 20px;
+
+  text-align: center;
+
+  border: 1px solid #30363d;
+
+  border-top: none;
+
+  border-radius: 0 0 6px 6px;
+}
+
+.empty-icon {
+  margin-bottom: 15px;
+
+  color: #6e7681;
+
+  font-size: 45px;
+}
+
+.no-issues h2 {
+  margin: 0 0 8px;
+
+  color: #f0f6fc;
+
+  font-size: 20px;
+}
+
+.no-issues p {
+  margin: 0 0 20px;
+
+  color: #8b949e;
+
+  font-size: 14px;
+}
+
+.empty-create-btn {
+  padding: 8px 15px;
+
+  border: 1px solid #30363d;
+
+  border-radius: 6px;
+
+  background: #21262d;
+
+  color: #e6edf3;
+
+  cursor: pointer;
+}
+
+.empty-create-btn:hover {
+  background: #30363d;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.issues-loading {
+  min-height: 70vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #8b949e;
+}
+
+.loading-spinner {
+  width: 25px;
+  height: 25px;
+
+  border: 3px solid #30363d;
+
+  border-top-color: #58a6ff;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   ERROR PAGE
+========================================= */
+
+.issues-error-page {
+  min-height: 70vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.issues-error-page h2 {
+  color: #f0f6fc;
+}
+
+.issues-error-page button {
+  padding: 8px 15px;
+
+  background: #21262d;
+
+  color: #e6edf3;
+
+  border: 1px solid #30363d;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .issues-page {
+    padding: 30px 20px;
+  }
+
+  .issues-header {
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .new-issue-btn {
+    align-self: flex-start;
+  }
+
+  .issues-header h1 {
+    font-size: 27px;
+  }
+
+  .issue-form {
+    padding: 20px;
+  }
+
+  .issue-item {
+    padding: 16px;
+  }
+
+  .issue-content h3 {
+    font-size: 15px;
+  }
+
+}
+
+.issue-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.close-issue-btn,
+.reopen-issue-btn {
+  padding: 7px 12px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.close-issue-btn {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+}
+
+.close-issue-btn:hover {
+  background: #30363d;
+  border-color: #8b949e;
+}
+
+.reopen-issue-btn {
+  background: transparent;
+  border: 1px solid #8957e5;
+  color: #a371f7;
+}
+
+.reopen-issue-btn:hover {
+  background: rgba(163, 113, 247, 0.1);
+}

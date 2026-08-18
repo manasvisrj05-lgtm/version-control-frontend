@@ -1,0 +1,190 @@
+.create-repo-page {
+  min-height: calc(100vh - 70px);
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 50px 20px;
+}
+
+.create-repo-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.create-repo-header {
+  margin-bottom: 35px;
+}
+
+.create-repo-header h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.create-repo-header p {
+  margin: 0;
+  color: #8b949e;
+  font-size: 15px;
+}
+
+.form-group {
+  margin-bottom: 28px;
+}
+
+.form-group > label {
+  display: block;
+  margin-bottom: 9px;
+  color: #f0f6fc;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group > label span {
+  color: #f85149;
+  margin-left: 4px;
+}
+
+.form-group small {
+  color: #8b949e;
+  font-weight: normal;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  background: #0d1117;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 11px 12px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 3px rgba(56, 139, 253, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #6e7681;
+}
+
+.visibility-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.visibility-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.visibility-option:hover {
+  background: #161b22;
+  border-color: #484f58;
+}
+
+.visibility-option input {
+  margin-top: 4px;
+  accent-color: #58a6ff;
+}
+
+.visibility-option strong {
+  color: #f0f6fc;
+  font-size: 14px;
+}
+
+.visibility-option p {
+  margin: 5px 0 0;
+  color: #8b949e;
+  font-size: 13px;
+}
+
+.create-repo-error {
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid #f85149;
+  color: #ff7b72;
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #21262d;
+}
+
+.cancel-button,
+.create-button {
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: #21262d;
+  color: #f0f6fc;
+  border: 1px solid #30363d;
+}
+
+.cancel-button:hover {
+  background: #30363d;
+}
+
+.create-button {
+  background: #238636;
+  color: white;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+}
+
+.create-button:hover {
+  background: #2ea043;
+}
+
+.create-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .create-repo-page {
+    padding: 30px 20px;
+  }
+
+  .create-repo-header h1 {
+    font-size: 26px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .create-button {
+    width: 100%;
+  }
+}

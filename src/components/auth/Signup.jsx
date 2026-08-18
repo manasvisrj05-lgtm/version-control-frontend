@@ -22,7 +22,7 @@ const Signup = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post("43.204.115.104:3000/signup", {
+      const res = await axios.post(`${process.env.BACKEND_URL}/signup`, {
         email: email,
         password: password,
         username: username,

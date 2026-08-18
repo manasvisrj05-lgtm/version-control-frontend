@@ -27,7 +27,7 @@ const Profile = () => {
 
       try {
         const response = await axios.get(
-          `43.204.115.104:3000/userProfile/${userId}`
+          `${process.env.BACKEND_URL}/userProfile/${userId}`
         );
         setUserDetails(response.data);
       } catch (err) {
@@ -45,7 +45,7 @@ const Profile = () => {
       }
       try {
         const response = await fetch(
-          `43.204.115.104:3000/repo/user/${userId}`
+          `${process.env.BACKEND_URL}/repo/user/${userId}`
         );
 
         if (!response.ok) {

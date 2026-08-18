@@ -22,7 +22,7 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post("43.204.115.104:3000/login", {
+      const res = await axios.post(`${process.env.BACKEND_URL}/login`, {
         email: email,
         password: password,
       });

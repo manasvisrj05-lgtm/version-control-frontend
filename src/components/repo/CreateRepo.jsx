@@ -34,7 +34,7 @@ const CreateRepo = () => {
       setLoading(true);
 
       const response = await fetch(
-        "43.204.115.104:3000/repo/create",
+        `${process.env.BACKEND_URL}/repo/create`,
         {
           method: "POST",
           headers: {

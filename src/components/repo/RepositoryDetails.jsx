@@ -12,39 +12,25 @@ const RepositoryDetails = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-
         const fetchRepository = async () => {
-
             try {
-
                 const response = await fetch(
-                    `http://localhost:3000/repo/${id}`
+                    `43.204.115.104:3000/repo/${id}`
                 );
-
                 if (!response.ok) {
                     throw new Error("Repository not found");
                 }
-
                 const data = await response.json();
-
                 console.log("Repository:", data);
-
                 setRepository(data);
-
             } catch (err) {
-
                 console.error(err);
                 setError(err.message);
-
             } finally {
-
                 setLoading(false);
-
             }
         };
-
         fetchRepository();
-
     }, [id]);
 
     if (loading) {
@@ -61,26 +47,19 @@ const RepositoryDetails = () => {
 
     return (
         <div className="repository-page">
-
             <div className="repository-header">
-
                 <div>
-
                     <h1>{repository.name}</h1>
-
                     <p>
                         {repository.description ||
                             "No description provided."}
                     </p>
-
                     <span>
                         {repository.visibility
                             ? "Public"
                             : "Private"}
                     </span>
-
                 </div>
-
                 <button
                     onClick={() =>
                         navigate(`/repo/${id}/issues`)
@@ -88,9 +67,7 @@ const RepositoryDetails = () => {
                 >
                     Issues
                 </button>
-
             </div>
-
         </div>
     );
 };

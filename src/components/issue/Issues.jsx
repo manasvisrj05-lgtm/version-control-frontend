@@ -12,29 +12,19 @@ const Issues = () => {
 
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
-
   const [showForm, setShowForm] = useState(false);
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
   const [error, setError] = useState("");
-
-  // ================================
-  // FETCH REPOSITORY
-  // ================================
 
   const fetchRepository = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/repo/${id}`
+        `43.204.115.104:3000/repo/${id}`
       );
-
       setRepository(response.data);
-
     } catch (err) {
       console.error("Error fetching repository:", err);
-
       setError(
         err.response?.data?.error ||
         "Unable to load repository."
@@ -42,21 +32,14 @@ const Issues = () => {
     }
   };
 
-  // ================================
-  // FETCH ISSUES
-  // ================================
-
   const fetchIssues = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/issue/all/${id}`
+        `43.204.115.104:3000/issue/all/${id}`
       );
-
       setIssues(response.data || []);
-
     } catch (err) {
       console.error("Error fetching issues:", err);
-
       setError(
         err.response?.data?.error ||
         "Unable to load issues."
@@ -64,29 +47,18 @@ const Issues = () => {
     }
   };
 
-  // ================================
-  // INITIAL LOAD
-  // ================================
-
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
       setError("");
-
       await Promise.all([
         fetchRepository(),
         fetchIssues(),
       ]);
-
       setLoading(false);
     };
-
     loadData();
   }, [id]);
-
-  // ================================
-  // CREATE ISSUE
-  // ================================
 
   const handleCreateIssue = async (e) => {
     e.preventDefault();
@@ -102,46 +74,30 @@ const Issues = () => {
       setError("Issue description is required.");
       return;
     }
-
     try {
       setCreating(true);
-
       const response = await axios.post(
-        `http://localhost:3000/issue/create/${id}`,
+        `43.204.115.104:3000/issue/create/${id}`,
         {
           title: title.trim(),
           description: description.trim(),
         }
       );
-
       console.log("Issue created:", response.data);
-
-      // Clear form
       setTitle("");
       setDescription("");
-
-      // Close form
       setShowForm(false);
-
-      // Refresh issues
       await fetchIssues();
-
     } catch (err) {
       console.error("Error creating issue:", err);
-
       setError(
         err.response?.data?.error ||
         "Unable to create issue."
       );
-
     } finally {
       setCreating(false);
     }
   };
-
-  // ================================
-  // LOADING
-  // ================================
 
   if (loading) {
     return (
@@ -153,10 +109,6 @@ const Issues = () => {
       </div>
     );
   }
-
-  // ================================
-  // REPOSITORY NOT FOUND
-  // ================================
 
   if (!repository) {
     return (
@@ -178,55 +130,37 @@ const Issues = () => {
     try {
       const newStatus =
         currentStatus === "open" ? "closed" : "open";
-
       await axios.put(
-        `http://localhost:3000/issue/update/${issueId}`,
+        `43.204.115.104:3000/issue/update/${issueId}`,
         {
           status: newStatus,
         }
       );
-
       await fetchIssues();
-
     } catch (err) {
       console.error("Error updating issue status:", err);
-
       setError(
         err.response?.data?.error ||
         "Unable to update issue."
       );
     }
   };
-
   const isPublic = repository.visibility === true;
-
   return (
     <div className="issues-page">
-
-      {/* ================================
-          HEADER
-      ================================= */}
-
       <div className="issues-top">
-
         <button
           className="back-btn"
           onClick={() => navigate(`/repo/${id}`)}
         >
           ← {repository.name}
         </button>
-
       </div>
 
-
       <div className="issues-header">
-
         <div className="issues-title-section">
-
           <div className="issues-title-row">
-
             <h1>Issues</h1>
-
             <span
               className={`visibility-badge ${
                 isPublic ? "public" : "private"
@@ -234,19 +168,12 @@ const Issues = () => {
             >
               {isPublic ? "Public" : "Private"}
             </span>
-
           </div>
-
           <p>
             Track bugs, feature requests and discussions
             for <strong>{repository.name}</strong>.
           </p>
-
         </div>
-
-
-        {/* New issue button */}
-
         {isPublic && (
           <button
             className="new-issue-btn"
@@ -259,58 +186,34 @@ const Issues = () => {
             New issue
           </button>
         )}
-
       </div>
-
-
-      {/* ================================
-          PRIVATE REPOSITORY MESSAGE
-      ================================= */}
 
       {!isPublic && (
         <div className="private-message">
-
-          <div className="private-icon">
-            🔒
-          </div>
-
           <div>
             <h3>Private repository</h3>
-
             <p>
               Issues cannot be created for private
               repositories.
             </p>
           </div>
-
         </div>
       )}
 
-
-      {/* ================================
-          CREATE ISSUE FORM
-      ================================= */}
-
       {showForm && isPublic && (
-
         <div className="issue-form-wrapper">
-
           <form
             className="issue-form"
             onSubmit={handleCreateIssue}
           >
-
             <div className="form-header">
-
               <div>
                 <h2>Create a new issue</h2>
-
                 <p>
                   Describe the problem or feature you'd
                   like to discuss.
                 </p>
               </div>
-
               <button
                 type="button"
                 className="close-form-btn"
@@ -321,9 +224,7 @@ const Issues = () => {
               >
                 ×
               </button>
-
             </div>
-
 
             {error && (
               <div className="issue-error">
@@ -331,14 +232,10 @@ const Issues = () => {
                 {error}
               </div>
             )}
-
-
             <div className="form-group">
-
               <label htmlFor="issue-title">
                 Title
               </label>
-
               <input
                 id="issue-title"
                 type="text"
@@ -349,20 +246,14 @@ const Issues = () => {
                 }
                 disabled={creating}
               />
-
               <small>
                 Keep the title short and descriptive.
               </small>
-
             </div>
-
-
             <div className="form-group">
-
               <label htmlFor="issue-description">
                 Description
               </label>
-
               <textarea
                 id="issue-description"
                 placeholder="Explain the problem, expected behaviour, steps to reproduce, or your feature request..."
@@ -372,12 +263,8 @@ const Issues = () => {
                 }
                 disabled={creating}
               />
-
             </div>
-
-
             <div className="form-actions">
-
               <button
                 type="button"
                 className="cancel-btn"
@@ -389,7 +276,6 @@ const Issues = () => {
               >
                 Cancel
               </button>
-
               <button
                 type="submit"
                 className="create-btn"
@@ -399,19 +285,10 @@ const Issues = () => {
                   ? "Creating..."
                   : "Create issue"}
               </button>
-
             </div>
-
           </form>
-
         </div>
-
       )}
-
-
-      {/* ================================
-          ERROR
-      ================================= */}
 
       {error && !showForm && isPublic && (
         <div className="issue-error standalone">
@@ -419,41 +296,25 @@ const Issues = () => {
           {error}
         </div>
       )}
-
-
-      {/* ================================
-          ISSUE LIST
-      ================================= */}
-
       <div className="issues-container">
-
         <div className="issues-list-header">
-
           <div>
             <strong>
               {issues.length}
             </strong>
-
             {" "}
-
             {issues.length === 1
               ? "issue"
               : "issues"}
           </div>
-
           <span>
             {issues.filter(
               (issue) => issue.status === "open"
             ).length} open
           </span>
-
         </div>
-
-
         {issues.length === 0 ? (
-
           <div className="no-issues">
-
             <div className="empty-icon">
               ○
             </div>
@@ -477,20 +338,15 @@ const Issues = () => {
                 Create the first issue
               </button>
             )}
-
           </div>
 
         ) : (
-
           <div className="issue-list">
-
             {issues.map((issue) => (
-
               <div
                 className="issue-item"
                 key={issue._id}
               >
-
                 <div
                   className={`issue-status-icon ${
                     issue.status
@@ -500,10 +356,7 @@ const Issues = () => {
                     ? "●"
                     : "✓"}
                 </div>
-
-
                 <div className="issue-content">
-
                   <h3>
                     {issue.title}
                   </h3>
@@ -511,30 +364,22 @@ const Issues = () => {
                   <p>
                     {issue.description}
                   </p>
-
                   <div className="issue-meta">
-
                     <span>
                       #{issue._id.slice(-6)}
                     </span>
-
                     <span>·</span>
-
                     <span>
                       {issue.status}
                     </span>
-
                     <span>·</span>
-
                     <span>
                       {new Date(
                         issue.createdAt
                       ).toLocaleDateString()}
                     </span>
-
                   </div>
                       <div className="issue-actions">
-
                   <button
                     className={
                       issue.status === "open"
@@ -552,20 +397,13 @@ const Issues = () => {
                       ? "Close issue"
                       : "Reopen issue"}
                   </button>
-
                 </div>
-
               </div>
                 </div>
-
             ))}
-
           </div>
-
         )}
-
       </div>
-
     </div>
   );
 };

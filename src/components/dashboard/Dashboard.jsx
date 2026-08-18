@@ -22,7 +22,7 @@ const Dashboard = () => {
     const fetchRepositories = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/repo/user/${userId}`
+          `43.204.115.104:3000/repo/user/${userId}`
         );
 
         if (!response.ok) {
@@ -45,7 +45,7 @@ const Dashboard = () => {
     const fetchSuggestedRepositories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/repo/all"
+          "43.204.115.104:3000/repo/all"
         );
 
         if (!response.ok) {
@@ -72,7 +72,7 @@ const Dashboard = () => {
     const fetchStarredRepositories = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/repo/starred/${userId}`
+          `43.204.115.104:3000/repo/starred/${userId}`
         );
 
         if (!response.ok) {
@@ -127,7 +127,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/repo/star",
+        "43.204.115.104:3000/repo/star",
         {
           method: "POST",
           headers: {

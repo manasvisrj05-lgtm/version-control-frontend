@@ -36,7 +36,7 @@ const CreateIssue = () => {
       setLoading(true);
 
       const response = await fetch(
-        `http://localhost:3000/issue/create/${id}`,
+        `43.204.115.104:3000/issue/create/${id}`,
         {
           method: "POST",
 

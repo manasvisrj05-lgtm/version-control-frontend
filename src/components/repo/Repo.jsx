@@ -35,7 +35,7 @@ const Repo = () => {
             }
             try {
             const response = await axios.get(
-                `http://localhost:3000/repo/starred/${userId}`
+                `43.204.115.104:3000/repo/starred/${userId}`
             );
             console.log("Starred repositories:", response.data);
             setRepositories(response.data.starRepos);

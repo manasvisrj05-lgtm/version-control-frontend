@@ -15,7 +15,7 @@ const RepositoryDetails = () => {
         const fetchRepository = async () => {
             try {
                 const response = await fetch(
-                    `${process.env.VITE_BACKEND_URL}/repo/${id}`
+                    `${import.meta.env.VITE_BACKEND_URL}/repo/${id}`
                 );
                 if (!response.ok) {
                     throw new Error("Repository not found");

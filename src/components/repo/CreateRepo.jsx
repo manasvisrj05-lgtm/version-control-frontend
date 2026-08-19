@@ -34,7 +34,7 @@ const CreateRepo = () => {
       setLoading(true);
 
       const response = await fetch(
-        `${process.env.VITE_BACKEND_URL}/repo/create`,
+        `${import.meta.env.VITE_BACKEND_URL}/repo/create`,
         {
           method: "POST",
           headers: {

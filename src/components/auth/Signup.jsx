@@ -22,7 +22,7 @@ const Signup = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`${process.env.VITE_BACKEND_URL}/signup`, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
         email: email,
         password: password,
         username: username,

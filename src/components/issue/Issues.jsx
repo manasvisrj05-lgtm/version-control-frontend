@@ -20,7 +20,7 @@ const Issues = () => {
   const fetchRepository = async () => {
     try {
       const response = await axios.get(
-        `${process.env.VITE_BACKEND_URL}/repo/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/repo/${id}`
       );
       setRepository(response.data);
     } catch (err) {
@@ -35,7 +35,7 @@ const Issues = () => {
   const fetchIssues = async () => {
     try {
       const response = await axios.get(
-        `${process.env.VITE_BACKEND_URL}/issue/all/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/issue/all/${id}`
       );
       setIssues(response.data || []);
     } catch (err) {
@@ -77,7 +77,7 @@ const Issues = () => {
     try {
       setCreating(true);
       const response = await axios.post(
-        `${process.env.VITE_BACKEND_URL}/issue/create/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/issue/create/${id}`,
         {
           title: title.trim(),
           description: description.trim(),
@@ -131,7 +131,7 @@ const Issues = () => {
       const newStatus =
         currentStatus === "open" ? "closed" : "open";
       await axios.put(
-        `${process.env.VITE_BACKEND_URL}/issue/update/${issueId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/issue/update/${issueId}`,
         {
           status: newStatus,
         }

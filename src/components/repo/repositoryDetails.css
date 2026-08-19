@@ -80,6 +80,58 @@
   border-color: #8b949e;
 }
 
+.commit-section {
+    margin-top: 40px;
+}
+
+.commit-section h2 {
+    margin-bottom: 20px;
+}
+
+.commit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.commit-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    background: white;
+}
+
+.commit-card h3 {
+    margin: 0 0 8px 0;
+}
+
+.commit-card p {
+    margin: 0;
+}
+
+.commit-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+
+    font-size: 14px;
+}
+
+.commit-info span:first-child {
+    font-family: monospace;
+    color: #555;
+}
+
+.commit-info span:last-child {
+    color: #777;
+}
 
 /* ================================
    Responsive

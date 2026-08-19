@@ -9,7 +9,7 @@ import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-
+  console.log("BACKEND URL =", import.meta.env.VITE_BACKEND_URL);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);

@@ -3,22 +3,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./repositoryDetails.css";
 
 const RepositoryDetails = () => {
-
     const { id } = useParams();
     const navigate = useNavigate();
 
     const [repository, setRepository] = useState(null);
     const [commits, setCommits] = useState([]);
 
+    // File explorer
+    const [files, setFiles] = useState([]);
+    const [currentPath, setCurrentPath] = useState("");
+    const [fileLoading, setFileLoading] = useState(true);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // -----------------------------------------
+    // FETCH REPOSITORY + COMMITS
+    // -----------------------------------------
+
     useEffect(() => {
-
         const fetchRepository = async () => {
-
             try {
-
                 // Fetch repository information
                 const repositoryResponse = await fetch(
                     `${import.meta.env.VITE_BACKEND_URL}/repo/${id}`
@@ -28,14 +33,14 @@ const RepositoryDetails = () => {
                     throw new Error("Repository not found");
                 }
 
-                const repositoryData = await repositoryResponse.json();
+                const repositoryData =
+                    await repositoryResponse.json();
 
                 console.log("Repository:", repositoryData);
 
                 setRepository(repositoryData);
 
-
-                // Fetch commits belonging to this repository
+                // Fetch commits
                 const commitsResponse = await fetch(
                     `${import.meta.env.VITE_BACKEND_URL}/commit/repository/${id}`
                 );
@@ -44,46 +49,121 @@ const RepositoryDetails = () => {
                     throw new Error("Unable to fetch commits");
                 }
 
-                const commitsData = await commitsResponse.json();
+                const commitsData =
+                    await commitsResponse.json();
 
                 console.log("Commits:", commitsData);
 
                 setCommits(commitsData.commits || []);
 
             } catch (err) {
-
                 console.error(err);
                 setError(err.message);
-
             } finally {
-
                 setLoading(false);
-
             }
         };
 
         fetchRepository();
-
     }, [id]);
 
+    // -----------------------------------------
+    // FETCH FILES
+    // -----------------------------------------
+
+    const fetchFiles = async (path = "") => {
+        try {
+            setFileLoading(true);
+
+            let url =
+                `${import.meta.env.VITE_BACKEND_URL}/repo/${id}/files`;
+
+            if (path) {
+                url += `?path=${encodeURIComponent(path)}`;
+            }
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error("Unable to fetch repository files");
+            }
+
+            const data = await response.json();
+
+            console.log("Repository files:", data);
+
+            setFiles(data.files || []);
+            setCurrentPath(path);
+
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setFileLoading(false);
+        }
+    };
+
+    // Fetch root files when repository loads
+    useEffect(() => {
+        if (repository) {
+            fetchFiles("");
+        }
+    }, [repository, id]);
+
+    // -----------------------------------------
+    // OPEN FOLDER
+    // -----------------------------------------
+
+    const openFolder = (folderName) => {
+        const newPath = currentPath
+            ? `${currentPath}/${folderName}`
+            : folderName;
+
+        fetchFiles(newPath);
+    };
+
+    // -----------------------------------------
+    // GO BACK ONE FOLDER
+    // -----------------------------------------
+
+    const goBack = () => {
+        if (!currentPath) {
+            return;
+        }
+
+        const parts = currentPath.split("/");
+
+        parts.pop();
+
+        const parentPath = parts.join("/");
+
+        fetchFiles(parentPath);
+    };
+
+    // -----------------------------------------
+    // LOADING
+    // -----------------------------------------
 
     if (loading) {
         return <h2>Loading repository...</h2>;
     }
 
+    // -----------------------------------------
+    // ERROR
+    // -----------------------------------------
 
     if (error) {
         return <h2>{error}</h2>;
     }
 
-
     if (!repository) {
         return <h2>Repository not found</h2>;
     }
 
+    // -----------------------------------------
+    // UI
+    // -----------------------------------------
 
     return (
-
         <div className="repository-page">
 
             {/* Repository Header */}
@@ -107,7 +187,6 @@ const RepositoryDetails = () => {
 
                 </div>
 
-
                 <button
                     onClick={() =>
                         navigate(`/repo/${id}/issues`)
@@ -119,12 +198,108 @@ const RepositoryDetails = () => {
             </div>
 
 
-            {/* Commit History */}
+            {/* FILE EXPLORER */}
+
+            <div className="file-section">
+
+                <div className="file-section-header">
+
+                    <h2>Files</h2>
+
+                    {currentPath && (
+                        <button onClick={goBack}>
+                            ← Back
+                        </button>
+                    )}
+
+                </div>
+
+
+                {/* Current Path */}
+
+                <div className="current-path">
+
+                    <span>📁</span>
+
+                    <span>
+                        {currentPath || "root"}
+                    </span>
+
+                </div>
+
+
+                {/* Files */}
+
+                {fileLoading ? (
+
+                    <p>Loading files...</p>
+
+                ) : files.length === 0 ? (
+
+                    <p>No files in this directory.</p>
+
+                ) : (
+
+                    <div className="file-list">
+
+                        {files.map((file) => (
+
+                            <div
+                                className="file-item"
+                                key={file.name}
+                                onClick={() => {
+                                    if (file.type === "folder") {
+                                        openFolder(file.name);
+                                    }
+                                }}
+                                style={{
+                                    cursor:
+                                        file.type === "folder"
+                                            ? "pointer"
+                                            : "default"
+                                }}
+                            >
+
+                                <span className="file-icon">
+
+                                    {file.type === "folder"
+                                        ? "📁"
+                                        : "📄"}
+
+                                </span>
+
+                                <span className="file-name">
+
+                                    {file.name}
+
+                                </span>
+
+                                {file.type === "file" && (
+
+                                    <span className="file-size">
+
+                                        {file.size} bytes
+
+                                    </span>
+
+                                )}
+
+                            </div>
+
+                        ))}
+
+                    </div>
+
+                )}
+
+            </div>
+
+
+            {/* COMMIT HISTORY */}
 
             <div className="commit-section">
 
                 <h2>Commits</h2>
-
 
                 {commits.length === 0 ? (
 
@@ -156,7 +331,6 @@ const RepositoryDetails = () => {
                                     </p>
 
                                 </div>
-
 
                                 <div className="commit-info">
 

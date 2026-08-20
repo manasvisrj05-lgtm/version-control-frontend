@@ -80,58 +80,128 @@
   border-color: #8b949e;
 }
 
+
+/* ================================
+   Commit Section
+================================ */
+
 .commit-section {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .commit-section h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  color: #e6edf3;
+  font-size: 24px;
 }
+
+
+/* ================================
+   Commit List
+================================ */
 
 .commit-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
+
+
+/* ================================
+   Commit Card
+================================ */
 
 .commit-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    padding: 20px;
+  padding: 20px;
 
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
 
-    background: white;
+  transition: 0.2s ease;
 }
 
+.commit-card:hover {
+  background: #1c2128;
+  border-color: #484f58;
+}
+
+
+/* ================================
+   Commit Message
+================================ */
+
 .commit-card h3 {
-    margin: 0 0 8px 0;
+  margin: 0 0 8px;
+
+  color: #e6edf3;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .commit-card p {
-    margin: 0;
+  margin: 0;
+
+  color: #8b949e;
+  font-size: 14px;
 }
+
+.commit-card strong {
+  color: #58a6ff;
+}
+
+
+/* ================================
+   Commit Information
+================================ */
 
 .commit-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 
-    font-size: 14px;
+  font-size: 13px;
 }
+
+
+/* Commit ID */
 
 .commit-info span:first-child {
-    font-family: monospace;
-    color: #555;
+  font-family: monospace;
+
+  color: #58a6ff;
+
+  background: #0d1117;
+
+  padding: 5px 8px;
+
+  border: 1px solid #30363d;
+  border-radius: 5px;
+
+  word-break: break-all;
 }
 
+
+/* Date */
+
 .commit-info span:last-child {
-    color: #777;
+  color: #8b949e;
 }
+
+
+/* ================================
+   Loading / Error Messages
+================================ */
+
+.repository-page > h2 {
+  color: #e6edf3;
+}
+
 
 /* ================================
    Responsive
@@ -154,5 +224,21 @@
 
   .repository-header button {
     align-self: flex-start;
+  }
+
+  .commit-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .commit-info {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .commit-info span:first-child {
+    max-width: 100%;
+    word-break: break-all;
   }
 }

@@ -9,22 +9,22 @@ const RepositoryDetails = () => {
     const [repository, setRepository] = useState(null);
     const [commits, setCommits] = useState([]);
 
-    // File explorer
     const [files, setFiles] = useState([]);
     const [currentPath, setCurrentPath] = useState("");
-    const [fileLoading, setFileLoading] = useState(true);
+
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const [loading, setLoading] = useState(true);
+    const [filesLoading, setFilesLoading] = useState(false);
     const [error, setError] = useState("");
 
-    // -----------------------------------------
+    // ------------------------------------------------
     // FETCH REPOSITORY + COMMITS
-    // -----------------------------------------
+    // ------------------------------------------------
 
     useEffect(() => {
         const fetchRepository = async () => {
             try {
-                // Fetch repository information
                 const repositoryResponse = await fetch(
                     `${import.meta.env.VITE_BACKEND_URL}/repo/${id}`
                 );
@@ -36,11 +36,8 @@ const RepositoryDetails = () => {
                 const repositoryData =
                     await repositoryResponse.json();
 
-                console.log("Repository:", repositoryData);
-
                 setRepository(repositoryData);
 
-                // Fetch commits
                 const commitsResponse = await fetch(
                     `${import.meta.env.VITE_BACKEND_URL}/commit/repository/${id}`
                 );
@@ -51,8 +48,6 @@ const RepositoryDetails = () => {
 
                 const commitsData =
                     await commitsResponse.json();
-
-                console.log("Commits:", commitsData);
 
                 setCommits(commitsData.commits || []);
 
@@ -67,20 +62,18 @@ const RepositoryDetails = () => {
         fetchRepository();
     }, [id]);
 
-    // -----------------------------------------
-    // FETCH FILES
-    // -----------------------------------------
+
+    // ------------------------------------------------
+    // FETCH FILES / FOLDERS
+    // ------------------------------------------------
 
     const fetchFiles = async (path = "") => {
         try {
-            setFileLoading(true);
+            setFilesLoading(true);
 
-            let url =
-                `${import.meta.env.VITE_BACKEND_URL}/repo/${id}/files`;
-
-            if (path) {
-                url += `?path=${encodeURIComponent(path)}`;
-            }
+            const url =
+                `${import.meta.env.VITE_BACKEND_URL}/repo/${id}/files` +
+                (path ? `?path=${encodeURIComponent(path)}` : "");
 
             const response = await fetch(url);
 
@@ -93,39 +86,45 @@ const RepositoryDetails = () => {
             console.log("Repository files:", data);
 
             setFiles(data.files || []);
-            setCurrentPath(path);
 
         } catch (err) {
             console.error(err);
+            setError(err.message);
         } finally {
-            setFileLoading(false);
+            setFilesLoading(false);
         }
     };
 
-    // Fetch root files when repository loads
+
+    // Load root files when repository opens
     useEffect(() => {
-        if (repository) {
-            fetchFiles("");
-        }
-    }, [repository, id]);
+        fetchFiles("");
+    }, [id]);
 
-    // -----------------------------------------
+
+    // ------------------------------------------------
     // OPEN FOLDER
-    // -----------------------------------------
+    // ------------------------------------------------
 
-    const openFolder = (folderName) => {
+    const openFolder = async (folderName) => {
+
         const newPath = currentPath
             ? `${currentPath}/${folderName}`
             : folderName;
 
-        fetchFiles(newPath);
+        setCurrentPath(newPath);
+        setSelectedFile(null);
+
+        await fetchFiles(newPath);
     };
 
-    // -----------------------------------------
-    // GO BACK ONE FOLDER
-    // -----------------------------------------
 
-    const goBack = () => {
+    // ------------------------------------------------
+    // GO BACK ONE FOLDER
+    // ------------------------------------------------
+
+    const goBack = async () => {
+
         if (!currentPath) {
             return;
         }
@@ -134,22 +133,57 @@ const RepositoryDetails = () => {
 
         parts.pop();
 
-        const parentPath = parts.join("/");
+        const newPath = parts.join("/");
 
-        fetchFiles(parentPath);
+        setCurrentPath(newPath);
+        setSelectedFile(null);
+
+        await fetchFiles(newPath);
     };
 
-    // -----------------------------------------
-    // LOADING
-    // -----------------------------------------
+
+    // ------------------------------------------------
+    // OPEN FILE
+    // ------------------------------------------------
+
+    const openFile = async (fileName) => {
+
+        const filePath = currentPath
+            ? `${currentPath}/${fileName}`
+            : fileName;
+
+        try {
+
+            const response = await fetch(
+                `${import.meta.env.VITE_BACKEND_URL}/repo/${id}/file?path=${encodeURIComponent(filePath)}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Unable to fetch file");
+            }
+
+            const data = await response.json();
+
+            console.log("File:", data);
+
+            setSelectedFile(data);
+
+        } catch (err) {
+
+            console.error(err);
+            setError(err.message);
+
+        }
+    };
+
+
+    // ------------------------------------------------
+    // LOADING / ERROR
+    // ------------------------------------------------
 
     if (loading) {
         return <h2>Loading repository...</h2>;
     }
-
-    // -----------------------------------------
-    // ERROR
-    // -----------------------------------------
 
     if (error) {
         return <h2>{error}</h2>;
@@ -159,9 +193,10 @@ const RepositoryDetails = () => {
         return <h2>Repository not found</h2>;
     }
 
-    // -----------------------------------------
+
+    // ------------------------------------------------
     // UI
-    // -----------------------------------------
+    // ------------------------------------------------
 
     return (
         <div className="repository-page">
@@ -198,13 +233,19 @@ const RepositoryDetails = () => {
             </div>
 
 
-            {/* FILE EXPLORER */}
+            {/* FILES */}
 
-            <div className="file-section">
+            <div className="files-section">
 
-                <div className="file-section-header">
+                <h2>Files</h2>
 
-                    <h2>Files</h2>
+                {/* Current path */}
+
+                <div className="file-path">
+
+                    <strong>
+                        📁 {currentPath || "root"}
+                    </strong>
 
                     {currentPath && (
                         <button onClick={goBack}>
@@ -215,22 +256,7 @@ const RepositoryDetails = () => {
                 </div>
 
 
-                {/* Current Path */}
-
-                <div className="current-path">
-
-                    <span>📁</span>
-
-                    <span>
-                        {currentPath || "root"}
-                    </span>
-
-                </div>
-
-
-                {/* Files */}
-
-                {fileLoading ? (
+                {filesLoading ? (
 
                     <p>Loading files...</p>
 
@@ -245,44 +271,29 @@ const RepositoryDetails = () => {
                         {files.map((file) => (
 
                             <div
-                                className="file-item"
                                 key={file.name}
+                                className="file-item"
                                 onClick={() => {
+
                                     if (file.type === "folder") {
                                         openFolder(file.name);
+                                    } else {
+                                        openFile(file.name);
                                     }
+
                                 }}
                                 style={{
-                                    cursor:
-                                        file.type === "folder"
-                                            ? "pointer"
-                                            : "default"
+                                    cursor: "pointer"
                                 }}
                             >
 
-                                <span className="file-icon">
+                                {file.type === "folder"
+                                    ? "📁"
+                                    : "📄"}
 
-                                    {file.type === "folder"
-                                        ? "📁"
-                                        : "📄"}
+                                {" "}
 
-                                </span>
-
-                                <span className="file-name">
-
-                                    {file.name}
-
-                                </span>
-
-                                {file.type === "file" && (
-
-                                    <span className="file-size">
-
-                                        {file.size} bytes
-
-                                    </span>
-
-                                )}
+                                {file.name}
 
                             </div>
 
@@ -295,7 +306,34 @@ const RepositoryDetails = () => {
             </div>
 
 
-            {/* COMMIT HISTORY */}
+            {/* FILE CONTENT */}
+
+            {selectedFile && (
+
+                <div className="file-content-section">
+
+                    <div className="file-content-header">
+
+                        <h2>
+                            📄 {selectedFile.name}
+                        </h2>
+
+                        <span>
+                            {selectedFile.path}
+                        </span>
+
+                    </div>
+
+                    <pre className="file-content">
+                        {selectedFile.content}
+                    </pre>
+
+                </div>
+
+            )}
+
+
+            {/* COMMITS */}
 
             <div className="commit-section">
 

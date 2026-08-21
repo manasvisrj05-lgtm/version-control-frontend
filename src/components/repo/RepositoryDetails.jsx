@@ -483,33 +483,49 @@ const RepositoryDetails = () => {
             {/* COMMIT VIEW INDICATOR */}
             {/* -------------------------------------- */}
 
+           
             {selectedCommit && (
 
-                <div
-                    className="commit-view-banner"
-                >
+                <div className="commit-view-banner">
 
-                    <div>
+                    <div className="commit-view-info">
 
-                        <strong>
-                            Viewing commit:
-                        </strong>{" "}
+                        <div className="commit-view-title">
+                            <span className="commit-view-icon">
+                                <i className="fa-solid fa-code-commit"></i>
+                            </span>
 
-                        {selectedCommit.message}
+                            <div>
+                                <strong>
+                                    Viewing commit
+                                </strong>
 
-                        <br />
+                                <h3>
+                                    {selectedCommit.message}
+                                </h3>
+                            </div>
+                        </div>
 
-                        <small>
-                            {selectedCommit.commitId}
-                        </small>
+                        <div className="commit-view-meta">
+
+                            <span>
+                                {selectedCommit.commitId}
+                            </span>
+
+                            <span>
+                                {new Date(
+                                    selectedCommit.date
+                                ).toLocaleString()}
+                            </span>
+
+                        </div>
 
                     </div>
 
 
                     <button
-                        onClick={
-                            backToCurrentRepository
-                        }
+                        className="back-current-btn"
+                        onClick={backToCurrentRepository}
                     >
                         ← Back to current repository
                     </button>
@@ -630,55 +646,6 @@ const RepositoryDetails = () => {
             {/* FILE CONTENT */}
             {/* -------------------------------------- */}
 
-            {selectedCommit && (
-
-                <div className="commit-view-banner">
-
-                    <div className="commit-view-info">
-
-                        <div className="commit-view-title">
-                            <span className="commit-view-icon">
-                                <i className="fa-solid fa-code-commit"></i>
-                            </span>
-
-                            <div>
-                                <strong>
-                                    Viewing commit
-                                </strong>
-
-                                <h3>
-                                    {selectedCommit.message}
-                                </h3>
-                            </div>
-                        </div>
-
-                        <div className="commit-view-meta">
-
-                            <span>
-                                {selectedCommit.commitId}
-                            </span>
-
-                            <span>
-                                {new Date(
-                                    selectedCommit.date
-                                ).toLocaleString()}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        className="back-current-btn"
-                        onClick={backToCurrentRepository}
-                    >
-                        ← Back to current repository
-                    </button>
-
-                </div>
-
-            )}
 
 
             {/* -------------------------------------- */}

@@ -3,10 +3,10 @@
 ================================ */
 
 .repository-page {
-  min-height: calc(100vh - 120px);
-  background: #0d1117;
-  color: #e6edf3;
-  padding: 40px 8%;
+    min-height: calc(100vh - 120px);
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 40px 8%;
 }
 
 
@@ -15,27 +15,24 @@
 ================================ */
 
 .repository-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  padding-bottom: 30px;
-  border-bottom: 1px solid #30363d;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #30363d;
 }
 
 .repository-header h1 {
-  margin: 0 0 10px;
-
-  color: #58a6ff;
-  font-size: 30px;
-  font-weight: 600;
+    margin: 0 0 10px;
+    color: #58a6ff;
+    font-size: 30px;
+    font-weight: 600;
 }
 
 .repository-header p {
-  margin: 0 0 15px;
-
-  color: #8b949e;
-  font-size: 15px;
+    margin: 0 0 15px;
+    color: #8b949e;
+    font-size: 15px;
 }
 
 
@@ -44,15 +41,12 @@
 ================================ */
 
 .repository-header span {
-  display: inline-block;
-
-  padding: 4px 10px;
-
-  border: 1px solid #30363d;
-  border-radius: 20px;
-
-  color: #8b949e;
-  font-size: 12px;
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid #30363d;
+    border-radius: 20px;
+    color: #8b949e;
+    font-size: 12px;
 }
 
 
@@ -61,152 +55,41 @@
 ================================ */
 
 .repository-header button {
-  padding: 8px 16px;
-
-  background: #21262d;
-  color: #e6edf3;
-
-  border: 1px solid #30363d;
-  border-radius: 6px;
-
-  font-size: 14px;
-  cursor: pointer;
-
-  transition: 0.2s ease;
+    padding: 8px 16px;
+    background: #21262d;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .repository-header button:hover {
-  background: #30363d;
-  border-color: #8b949e;
+    background: #30363d;
+    border-color: #8b949e;
 }
 
 
 /* ================================
-   Commit Section
+   Files Section
 ================================ */
-
-.commit-section {
-  margin-top: 40px;
-}
-
-.commit-section h2 {
-  margin-bottom: 20px;
-  color: #e6edf3;
-  font-size: 24px;
-}
-
-
-/* ================================
-   Commit List
-================================ */
-
-.commit-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-
-/* ================================
-   Commit Card
-================================ */
-
-.commit-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 20px;
-
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-
-  transition: 0.2s ease;
-}
-
-.commit-card:hover {
-  background: #1c2128;
-  border-color: #484f58;
-}
-
-
-/* ================================
-   Commit Message
-================================ */
-
-.commit-card h3 {
-  margin: 0 0 8px;
-
-  color: #e6edf3;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.commit-card p {
-  margin: 0;
-
-  color: #8b949e;
-  font-size: 14px;
-}
-
-.commit-card strong {
-  color: #58a6ff;
-}
-
-
-/* ================================
-   Commit Information
-================================ */
-
-.commit-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-
-  font-size: 13px;
-}
-
-
-/* Commit ID */
-
-.commit-info span:first-child {
-  font-family: monospace;
-
-  color: #58a6ff;
-
-  background: #0d1117;
-
-  padding: 5px 8px;
-
-  border: 1px solid #30363d;
-  border-radius: 5px;
-
-  word-break: break-all;
-}
-
-
-/* Date */
-
-.commit-info span:last-child {
-  color: #8b949e;
-}
-
-
-/* ================================
-   Loading / Error Messages
-================================ */
-
-.repository-page > h2 {
-  color: #e6edf3;
-}
 
 .files-section {
     margin-top: 30px;
 }
 
-/* Breadcrumb / current path */
+.files-section h2 {
+    margin-bottom: 20px;
+    color: #e6edf3;
+    font-size: 24px;
+}
+
+
+/* ================================
+   Current Path
+================================ */
+
 .file-path {
     display: flex;
     justify-content: space-between;
@@ -215,7 +98,41 @@
     color: #e6edf3;
 }
 
-/* File list container */
+.file-path strong {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.file-path i {
+    color: #54aeff;
+}
+
+
+/* ================================
+   Back Button
+================================ */
+
+.file-path button {
+    background: #21262d;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.file-path button:hover {
+    background: #30363d;
+    border-color: #8b949e;
+}
+
+
+/* ================================
+   File List
+================================ */
+
 .file-list {
     border: 1px solid #30363d;
     border-radius: 6px;
@@ -223,8 +140,15 @@
     background: #0d1117;
 }
 
-/* Individual file/folder */
+
+/* ================================
+   Individual File / Folder
+================================ */
+
 .file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 12px 16px;
     border-bottom: 1px solid #21262d;
     background: #0d1117;
@@ -237,37 +161,85 @@
     border-bottom: none;
 }
 
-/* GitHub-style hover */
 .file-item:hover {
     background: #161b22;
-    color: #e6edf3;
 }
 
-/* File/folder links */
-.file-item a {
-    color: #58a6ff;
-    text-decoration: none;
-}
 
-.file-item a:hover {
-    color: #79c0ff;
-    text-decoration: underline;
-}
+/* ================================
+   File / Folder Icons
+================================ */
 
-/* Icons */
-.file-item svg {
+.file-icon {
+    width: 18px;
+    text-align: center;
     color: #8b949e;
 }
 
-/* File content section */
+.folder-icon {
+    color: #54aeff;
+}
+
+.file-icon.fa-folder {
+    color: #54aeff;
+}
+
+.file-icon.fa-file {
+    color: #8b949e;
+}
+
+
+/* If icons are directly inside .file-item */
+
+.file-item > i {
+    width: 18px;
+    text-align: center;
+}
+
+.file-item > .fa-folder {
+    color: #54aeff;
+}
+
+.file-item > .fa-file {
+    color: #8b949e;
+}
+
+
+/* ================================
+   File Name
+================================ */
+
+.file-name {
+    color: #58a6ff;
+    font-size: 14px;
+}
+
+
+/* ================================
+   File Content Section
+================================ */
+
 .file-content-section {
     margin-top: 30px;
 }
 
-/* File content heading */
+
+/* ================================
+   File Content Header
+================================ */
+
 .file-content-header {
     margin-bottom: 10px;
     color: #e6edf3;
+}
+
+.file-content-header h2 {
+    margin-bottom: 6px;
+}
+
+.file-content-header h2 i {
+    color: #8b949e;
+    margin-right: 8px;
 }
 
 .file-content-header span {
@@ -275,7 +247,11 @@
     font-size: 14px;
 }
 
-/* Actual code/file content */
+
+/* ================================
+   Actual File Content
+================================ */
+
 .file-content {
     background: #0d1117;
     color: #e6edf3;
@@ -284,13 +260,22 @@
     padding: 20px;
     overflow-x: auto;
     white-space: pre-wrap;
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo,
-        Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        SF Mono,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        "Courier New",
+        monospace;
+
     font-size: 14px;
     line-height: 1.6;
 }
 
-/* If content is inside <pre> */
 .file-content pre {
     margin: 0;
     background: transparent;
@@ -299,24 +284,128 @@
     white-space: pre-wrap;
 }
 
-/* Buttons */
-.file-path button {
-    background: #21262d;
+
+/* =================================================
+   COMMIT SECTION
+================================================= */
+
+.commit-section {
+    margin-top: 40px;
+}
+
+.commit-section h2 {
+    margin-bottom: 20px;
     color: #e6edf3;
+    font-size: 24px;
+}
+
+
+/* =================================================
+   COMMIT LIST
+================================================= */
+
+.commit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* =================================================
+   COMMIT CARD
+================================================= */
+
+.commit-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 18px 20px;
+
+    background: #161b22;
     border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 6px 12px;
-    cursor: pointer;
+    border-radius: 8px;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease;
 }
 
-.file-path button:hover {
-    background: #30363d;
-    border-color: #8b949e;
+.commit-card:hover {
+    background: #1c2128;
+    border-color: #484f58;
 }
 
-/* ================================================= */
-/* COMMIT VIEW BANNER */
-/* ================================================= */
+
+/* =================================================
+   COMMIT MESSAGE
+================================================= */
+
+.commit-card h3 {
+    margin: 0 0 8px;
+    color: #e6edf3;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.commit-card p {
+    margin: 0 0 5px;
+    color: #8b949e;
+    font-size: 13px;
+}
+
+.commit-card strong {
+    color: #58a6ff;
+}
+
+.commit-card small {
+    color: #8b949e;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+
+/* =================================================
+   COMMIT INFORMATION
+================================================= */
+
+.commit-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.commit-info > span {
+    color: #8b949e;
+    font-size: 12px;
+}
+
+
+/* Commit ID */
+
+.commit-info span:first-child {
+    font-family: monospace;
+    color: #58a6ff;
+    background: #0d1117;
+    padding: 5px 8px;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    word-break: break-all;
+}
+
+
+/* Date */
+
+.commit-info span:last-child {
+    color: #8b949e;
+}
+
+
+/* =================================================
+   VIEW COMMIT BANNER
+================================================= */
 
 .commit-view-banner {
     margin: 24px 0;
@@ -325,32 +414,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
 
-    background: #f6f8fa;
-
-    border: 1px solid #d0d7de;
+    background: #161b22;
+    border: 1px solid #30363d;
     border-radius: 8px;
-
-    box-shadow: 0 1px 2px rgba(27, 31, 36, 0.04);
 }
 
 
-/* ================================================= */
-/* COMMIT VIEW INFORMATION */
-/* ================================================= */
+/* =================================================
+   COMMIT VIEW INFORMATION
+================================================= */
 
 .commit-view-info {
     min-width: 0;
 }
-
 
 .commit-view-title {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 
 .commit-view-icon {
     width: 34px;
@@ -362,12 +447,15 @@
 
     border-radius: 50%;
 
-    background: #ddf4ff;
-    color: #0969da;
+    background: #1f6feb;
+    color: #ffffff;
 
-    font-size: 18px;
+    font-size: 16px;
 }
 
+.commit-view-icon i {
+    font-size: 16px;
+}
 
 .commit-view-title strong {
     display: block;
@@ -375,9 +463,8 @@
     font-size: 13px;
     font-weight: 600;
 
-    color: #656d76;
+    color: #8b949e;
 }
-
 
 .commit-view-title h3 {
     margin: 2px 0 0;
@@ -385,9 +472,8 @@
     font-size: 18px;
     font-weight: 600;
 
-    color: #1f2328;
+    color: #e6edf3;
 }
-
 
 .commit-view-meta {
     margin-top: 8px;
@@ -397,32 +483,66 @@
     gap: 14px;
     flex-wrap: wrap;
 
-    color: #656d76;
-
+    color: #8b949e;
     font-size: 12px;
 }
 
-
 .commit-view-meta span:first-child {
     font-family: monospace;
+    color: #58a6ff;
 }
 
 
-/* ================================================= */
-/* BACK TO CURRENT REPOSITORY BUTTON */
-/* ================================================= */
+/* =================================================
+   VIEW COMMIT BUTTON
+================================================= */
+
+.view-commit-btn {
+    padding: 6px 14px;
+
+    border: 1px solid #30363d;
+    border-radius: 6px;
+
+    background: #21262d;
+    color: #e6edf3;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.view-commit-btn:hover {
+    background: #30363d;
+    border-color: #8b949e;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.view-commit-btn:active {
+    background: #21262d;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =================================================
+   BACK TO CURRENT REPOSITORY BUTTON
+================================================= */
 
 .back-current-btn {
     flex-shrink: 0;
 
     padding: 7px 14px;
 
-    border: 1px solid #d0d7de;
+    border: 1px solid #30363d;
     border-radius: 6px;
 
-    background: #f6f8fa;
-
-    color: #24292f;
+    background: #21262d;
+    color: #e6edf3;
 
     font-size: 14px;
     font-weight: 600;
@@ -430,196 +550,57 @@
     cursor: pointer;
 
     transition:
-        background 0.15s ease,
+        background-color 0.15s ease,
         border-color 0.15s ease,
         box-shadow 0.15s ease;
 }
-
 
 .back-current-btn:hover {
-    background: #f3f4f6;
-
-    border-color: #8c959f;
-
-    box-shadow:
-        0 1px 0 rgba(31, 35, 40, 0.04);
+    background: #30363d;
+    border-color: #8b949e;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-
 
 .back-current-btn:active {
-    background: #ebecf0;
-
-    box-shadow:
-        inset 0 1px 2px rgba(31, 35, 40, 0.1);
+    background: #21262d;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 
-/* ================================================= */
-/* VIEW COMMIT BUTTON */
-/* ================================================= */
+/* =================================================
+   LOADING / ERROR
+================================================= */
 
-.view-commit-btn {
-    padding: 6px 14px;
-
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-
-    background: #f6f8fa;
-
-    color: #24292f;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+.repository-page > h2 {
+    color: #e6edf3;
 }
 
 
-.view-commit-btn:hover {
-    background: #f3f4f6;
-
-    border-color: #8c959f;
-
-    box-shadow:
-        0 1px 0 rgba(31, 35, 40, 0.04);
-}
-
-
-.view-commit-btn:active {
-    background: #ebecf0;
-
-    box-shadow:
-        inset 0 1px 2px rgba(31, 35, 40, 0.1);
-}
-
-
-/* ================================================= */
-/* COMMIT CARD */
-/* ================================================= */
-
-.commit-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 16px;
-
-    border-bottom: 1px solid #d8dee4;
-
-    background: white;
-
-    transition:
-        background 0.15s ease;
-}
-
-
-.commit-card:hover {
-    background: #f6f8fa;
-}
-
-
-.commit-card h3 {
-    margin: 0 0 6px;
-
-    color: #1f2328;
-
-    font-size: 16px;
-}
-
-
-.commit-card p {
-    margin: 0 0 5px;
-
-    color: #656d76;
-
-    font-size: 13px;
-}
-
-
-.commit-card small {
-    color: #656d76;
-
-    font-family: monospace;
-
-    font-size: 11px;
-}
-
-
-.commit-info {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    flex-shrink: 0;
-}
-
-
-.commit-info > span {
-    color: #656d76;
-
-    font-size: 12px;
-}
-
-.file-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 8px 12px;
-
-    border-bottom: 1px solid #d8dee4;
-
-    transition: background 0.15s ease;
-}
-
-.file-item:hover {
-    background: #f6f8fa;
-}
-
-.file-icon {
-    width: 18px;
-    text-align: center;
-
-    color: #656d76;
-}
-
-.folder-icon {
-    color: #54aeff;
-}
-
-.file-name {
-    color: #0969da;
-    font-size: 14px;
-}
-
-.file-path i {
-    color: #54aeff;
-}
-
-.file-content-header h2 i {
-    color: #656d76;
-}
-
-.commit-view-icon i {
-    font-size: 17px;
-}
-
-/* ================================================= */
-/* MOBILE */
-/* ================================================= */
+/* =================================================
+   MOBILE
+================================================= */
 
 @media (max-width: 700px) {
 
+    .repository-page {
+        padding: 30px 20px;
+    }
+
+    .repository-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .repository-header h1 {
+        font-size: 25px;
+    }
+
+    .repository-header button {
+        align-self: flex-start;
+    }
+
     .commit-view-banner {
         align-items: flex-start;
-
         flex-direction: column;
     }
 
@@ -629,54 +610,18 @@
 
     .commit-card {
         align-items: flex-start;
-
         flex-direction: column;
+        gap: 20px;
     }
 
     .commit-info {
         width: 100%;
-
         justify-content: space-between;
+        align-items: flex-start;
     }
 
-}
-
-/* ================================
-   Responsive
-================================ */
-
-@media (max-width: 700px) {
-
-  .repository-page {
-    padding: 30px 20px;
-  }
-
-  .repository-header {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .repository-header h1 {
-    font-size: 25px;
-  }
-
-  .repository-header button {
-    align-self: flex-start;
-  }
-
-  .commit-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .commit-info {
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .commit-info span:first-child {
-    max-width: 100%;
-    word-break: break-all;
-  }
+    .commit-info span:first-child {
+        max-width: 100%;
+        word-break: break-all;
+    }
 }

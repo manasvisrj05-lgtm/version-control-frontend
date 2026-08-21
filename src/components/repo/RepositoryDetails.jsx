@@ -6,6 +6,8 @@ const RepositoryDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
     const [repository, setRepository] = useState(null);
     const [commits, setCommits] = useState([]);
 
@@ -13,6 +15,9 @@ const RepositoryDetails = () => {
     const [currentPath, setCurrentPath] = useState("");
 
     const [selectedFile, setSelectedFile] = useState(null);
+
+    // null means we are viewing the latest/current repository
+    const [selectedCommit, setSelectedCommit] = useState(null);
 
     const [loading, setLoading] = useState(true);
     const [filesLoading, setFilesLoading] = useState(false);
@@ -25,8 +30,15 @@ const RepositoryDetails = () => {
     useEffect(() => {
         const fetchRepository = async () => {
             try {
+                setLoading(true);
+                setError("");
+
+                // -----------------------------------------
+                // FETCH REPOSITORY
+                // -----------------------------------------
+
                 const repositoryResponse = await fetch(
-                    `${import.meta.env.VITE_BACKEND_URL}/repo/${id}`
+                    `${BACKEND_URL}/repo/${id}`
                 );
 
                 if (!repositoryResponse.ok) {
@@ -38,8 +50,12 @@ const RepositoryDetails = () => {
 
                 setRepository(repositoryData);
 
+                // -----------------------------------------
+                // FETCH COMMITS
+                // -----------------------------------------
+
                 const commitsResponse = await fetch(
-                    `${import.meta.env.VITE_BACKEND_URL}/commit/repository/${id}`
+                    `${BACKEND_URL}/commit/repository/${id}`
                 );
 
                 if (!commitsResponse.ok) {
@@ -60,30 +76,38 @@ const RepositoryDetails = () => {
         };
 
         fetchRepository();
-    }, [id]);
+    }, [id, BACKEND_URL]);
 
 
     // ------------------------------------------------
-    // FETCH FILES / FOLDERS
+    // FETCH CURRENT / LATEST REPOSITORY FILES
     // ------------------------------------------------
 
-    const fetchFiles = async (path = "") => {
+    const fetchCurrentRepositoryFiles = async (path = "") => {
         try {
             setFilesLoading(true);
+            setError("");
 
             const url =
-                `${import.meta.env.VITE_BACKEND_URL}/repo/${id}/files` +
-                (path ? `?path=${encodeURIComponent(path)}` : "");
+                `${BACKEND_URL}/repo/${id}/files` +
+                (path
+                    ? `?path=${encodeURIComponent(path)}`
+                    : "");
 
             const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error("Unable to fetch repository files");
+                throw new Error(
+                    "Unable to fetch repository files"
+                );
             }
 
             const data = await response.json();
 
-            console.log("Repository files:", data);
+            console.log(
+                "Current repository files:",
+                data
+            );
 
             setFiles(data.files || []);
 
@@ -96,10 +120,86 @@ const RepositoryDetails = () => {
     };
 
 
-    // Load root files when repository opens
+    // ------------------------------------------------
+    // FETCH FILES FROM SPECIFIC COMMIT
+    // ------------------------------------------------
+
+    const fetchCommitFiles = async (
+        commitId,
+        path = ""
+    ) => {
+        try {
+            setFilesLoading(true);
+            setError("");
+
+            const url =
+                `${BACKEND_URL}/commit/${commitId}/files` +
+                (path
+                    ? `?path=${encodeURIComponent(path)}`
+                    : "");
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to fetch commit files"
+                );
+            }
+
+            const data = await response.json();
+
+            console.log(
+                "Commit files:",
+                data
+            );
+
+            setFiles(data.files || []);
+
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        } finally {
+            setFilesLoading(false);
+        }
+    };
+
+
+    // ------------------------------------------------
+    // LOAD ROOT FILES WHEN REPOSITORY OPENS
+    // ------------------------------------------------
+
     useEffect(() => {
-        fetchFiles("");
+        fetchCurrentRepositoryFiles("");
     }, [id]);
+
+
+    // ------------------------------------------------
+    // OPEN A SPECIFIC COMMIT
+    // ------------------------------------------------
+
+    const openCommit = async (commit) => {
+        setSelectedCommit(commit);
+        setCurrentPath("");
+        setSelectedFile(null);
+
+        await fetchCommitFiles(
+            commit.commitId,
+            ""
+        );
+    };
+
+
+    // ------------------------------------------------
+    // RETURN TO CURRENT REPOSITORY
+    // ------------------------------------------------
+
+    const backToCurrentRepository = async () => {
+        setSelectedCommit(null);
+        setCurrentPath("");
+        setSelectedFile(null);
+
+        await fetchCurrentRepositoryFiles("");
+    };
 
 
     // ------------------------------------------------
@@ -115,7 +215,20 @@ const RepositoryDetails = () => {
         setCurrentPath(newPath);
         setSelectedFile(null);
 
-        await fetchFiles(newPath);
+        if (selectedCommit) {
+
+            await fetchCommitFiles(
+                selectedCommit.commitId,
+                newPath
+            );
+
+        } else {
+
+            await fetchCurrentRepositoryFiles(
+                newPath
+            );
+
+        }
     };
 
 
@@ -138,33 +251,47 @@ const RepositoryDetails = () => {
         setCurrentPath(newPath);
         setSelectedFile(null);
 
-        await fetchFiles(newPath);
+        if (selectedCommit) {
+
+            await fetchCommitFiles(
+                selectedCommit.commitId,
+                newPath
+            );
+
+        } else {
+
+            await fetchCurrentRepositoryFiles(
+                newPath
+            );
+
+        }
     };
 
 
     // ------------------------------------------------
-    // OPEN FILE
+    // OPEN CURRENT REPOSITORY FILE
     // ------------------------------------------------
 
-    const openFile = async (fileName) => {
-
-        const filePath = currentPath
-            ? `${currentPath}/${fileName}`
-            : fileName;
+    const openCurrentFile = async (filePath) => {
 
         try {
 
             const response = await fetch(
-                `${import.meta.env.VITE_BACKEND_URL}/repo/${id}/file?path=${encodeURIComponent(filePath)}`
+                `${BACKEND_URL}/repo/${id}/file?path=${encodeURIComponent(filePath)}`
             );
 
             if (!response.ok) {
-                throw new Error("Unable to fetch file");
+                throw new Error(
+                    "Unable to fetch file"
+                );
             }
 
             const data = await response.json();
 
-            console.log("File:", data);
+            console.log(
+                "Current file:",
+                data
+            );
 
             setSelectedFile(data);
 
@@ -178,19 +305,118 @@ const RepositoryDetails = () => {
 
 
     // ------------------------------------------------
-    // LOADING / ERROR
+    // OPEN FILE FROM SPECIFIC COMMIT
+    // ------------------------------------------------
+
+    const openCommitFile = async (
+        commitId,
+        filePath
+    ) => {
+
+        try {
+
+            const response = await fetch(
+                `${BACKEND_URL}/commit/${commitId}/file?path=${encodeURIComponent(filePath)}`
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to fetch commit file"
+                );
+            }
+
+            const data = await response.json();
+
+            console.log(
+                "Commit file:",
+                data
+            );
+
+            setSelectedFile(data);
+
+        } catch (err) {
+
+            console.error(err);
+            setError(err.message);
+
+        }
+    };
+
+
+    // ------------------------------------------------
+    // OPEN FILE
+    // ------------------------------------------------
+
+    const openFile = async (fileName) => {
+
+        const filePath = currentPath
+            ? `${currentPath}/${fileName}`
+            : fileName;
+
+        setSelectedFile(null);
+
+        if (selectedCommit) {
+
+            await openCommitFile(
+                selectedCommit.commitId,
+                filePath
+            );
+
+        } else {
+
+            await openCurrentFile(
+                filePath
+            );
+
+        }
+    };
+
+
+    // ------------------------------------------------
+    // LOADING
     // ------------------------------------------------
 
     if (loading) {
-        return <h2>Loading repository...</h2>;
+        return (
+            <h2>
+                Loading repository...
+            </h2>
+        );
     }
+
+
+    // ------------------------------------------------
+    // ERROR
+    // ------------------------------------------------
 
     if (error) {
-        return <h2>{error}</h2>;
+        return (
+            <div>
+                <h2>{error}</h2>
+
+                <button
+                    onClick={() => {
+                        setError("");
+                        window.location.reload();
+                    }}
+                >
+                    Retry
+                </button>
+            </div>
+        );
     }
 
+
+    // ------------------------------------------------
+    // REPOSITORY NOT FOUND
+    // ------------------------------------------------
+
     if (!repository) {
-        return <h2>Repository not found</h2>;
+        return (
+            <h2>
+                Repository not found
+            </h2>
+        );
     }
 
 
@@ -201,13 +427,17 @@ const RepositoryDetails = () => {
     return (
         <div className="repository-page">
 
-            {/* Repository Header */}
+            {/* -------------------------------------- */}
+            {/* REPOSITORY HEADER */}
+            {/* -------------------------------------- */}
 
             <div className="repository-header">
 
                 <div>
 
-                    <h1>{repository.name}</h1>
+                    <h1>
+                        {repository.name}
+                    </h1>
 
                     <p>
                         {repository.description ||
@@ -222,9 +452,12 @@ const RepositoryDetails = () => {
 
                 </div>
 
+
                 <button
                     onClick={() =>
-                        navigate(`/repo/${id}/issues`)
+                        navigate(
+                            `/repo/${id}/issues`
+                        )
                     }
                 >
                     Issues
@@ -233,36 +466,95 @@ const RepositoryDetails = () => {
             </div>
 
 
+            {/* -------------------------------------- */}
+            {/* COMMIT VIEW INDICATOR */}
+            {/* -------------------------------------- */}
+
+            {selectedCommit && (
+
+                <div
+                    className="commit-view-banner"
+                >
+
+                    <div>
+
+                        <strong>
+                            Viewing commit:
+                        </strong>{" "}
+
+                        {selectedCommit.message}
+
+                        <br />
+
+                        <small>
+                            {selectedCommit.commitId}
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        onClick={
+                            backToCurrentRepository
+                        }
+                    >
+                        ← Back to current repository
+                    </button>
+
+                </div>
+
+            )}
+
+
+            {/* -------------------------------------- */}
             {/* FILES */}
+            {/* -------------------------------------- */}
 
             <div className="files-section">
 
-                <h2>Files</h2>
+                <h2>
+                    {selectedCommit
+                        ? "Files in this commit"
+                        : "Current Files"}
+                </h2>
 
-                {/* Current path */}
+
+                {/* CURRENT PATH */}
 
                 <div className="file-path">
 
                     <strong>
-                        📁 {currentPath || "root"}
+                        📁{" "}
+                        {currentPath || "root"}
                     </strong>
 
+
                     {currentPath && (
-                        <button onClick={goBack}>
+
+                        <button
+                            onClick={goBack}
+                        >
                             ← Back
                         </button>
+
                     )}
 
                 </div>
 
 
+                {/* FILE LIST */}
+
                 {filesLoading ? (
 
-                    <p>Loading files...</p>
+                    <p>
+                        Loading files...
+                    </p>
 
                 ) : files.length === 0 ? (
 
-                    <p>No files in this directory.</p>
+                    <p>
+                        No files in this directory.
+                    </p>
 
                 ) : (
 
@@ -271,23 +563,36 @@ const RepositoryDetails = () => {
                         {files.map((file) => (
 
                             <div
-                                key={file.name}
+                                key={`${file.type}-${file.name}`}
                                 className="file-item"
                                 onClick={() => {
 
-                                    if (file.type === "folder") {
-                                        openFolder(file.name);
+                                    if (
+                                        file.type ===
+                                        "folder"
+                                    ) {
+
+                                        openFolder(
+                                            file.name
+                                        );
+
                                     } else {
-                                        openFile(file.name);
+
+                                        openFile(
+                                            file.name
+                                        );
+
                                     }
 
                                 }}
                                 style={{
-                                    cursor: "pointer"
+                                    cursor:
+                                        "pointer"
                                 }}
                             >
 
-                                {file.type === "folder"
+                                {file.type ===
+                                "folder"
                                     ? "📁"
                                     : "📄"}
 
@@ -306,16 +611,24 @@ const RepositoryDetails = () => {
             </div>
 
 
+            {/* -------------------------------------- */}
             {/* FILE CONTENT */}
+            {/* -------------------------------------- */}
 
             {selectedFile && (
 
-                <div className="file-content-section">
+                <div
+                    className="file-content-section"
+                >
 
-                    <div className="file-content-header">
+                    <div
+                        className=
+                            "file-content-header"
+                    >
 
                         <h2>
-                            📄 {selectedFile.name}
+                            📄{" "}
+                            {selectedFile.name}
                         </h2>
 
                         <span>
@@ -324,7 +637,10 @@ const RepositoryDetails = () => {
 
                     </div>
 
-                    <pre className="file-content">
+
+                    <pre
+                        className="file-content"
+                    >
                         {selectedFile.content}
                     </pre>
 
@@ -333,60 +649,99 @@ const RepositoryDetails = () => {
             )}
 
 
+            {/* -------------------------------------- */}
             {/* COMMITS */}
+            {/* -------------------------------------- */}
 
             <div className="commit-section">
 
-                <h2>Commits</h2>
+                <h2>
+                    Commits
+                </h2>
+
 
                 {commits.length === 0 ? (
 
-                    <p>No commits yet.</p>
+                    <p>
+                        No commits yet.
+                    </p>
 
                 ) : (
 
                     <div className="commit-list">
 
-                        {commits.map((commit) => (
+                        {commits.map(
+                            (commit) => (
 
-                            <div
-                                className="commit-card"
-                                key={commit._id}
-                            >
+                                <div
+                                    className=
+                                        "commit-card"
+                                    key={
+                                        commit._id
+                                    }
+                                >
 
-                                <div>
+                                    <div>
 
-                                    <h3>
-                                        {commit.message}
-                                    </h3>
+                                        <h3>
+                                            {
+                                                commit.message
+                                            }
+                                        </h3>
 
-                                    <p>
-                                        By{" "}
-                                        <strong>
-                                            {commit.author?.username ||
-                                                "Unknown user"}
-                                        </strong>
-                                    </p>
+
+                                        <p>
+                                            By{" "}
+                                            <strong>
+                                                {
+                                                    commit
+                                                        .author
+                                                        ?.username ||
+                                                    "Unknown user"
+                                                }
+                                            </strong>
+                                        </p>
+
+
+                                        <small>
+                                            {
+                                                commit.commitId
+                                            }
+                                        </small>
+
+                                    </div>
+
+
+                                    <div
+                                        className=
+                                            "commit-info"
+                                    >
+
+                                        <span>
+                                            {
+                                                new Date(
+                                                    commit.date
+                                                ).toLocaleString()
+                                            }
+                                        </span>
+
+
+                                        <button
+                                            onClick={() =>
+                                                openCommit(
+                                                    commit
+                                                )
+                                            }
+                                        >
+                                            View commit
+                                        </button>
+
+                                    </div>
 
                                 </div>
 
-                                <div className="commit-info">
-
-                                    <span>
-                                        {commit.commitId}
-                                    </span>
-
-                                    <span>
-                                        {new Date(
-                                            commit.date
-                                        ).toLocaleString()}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        ))}
+                            )
+                        )}
 
                     </div>
 

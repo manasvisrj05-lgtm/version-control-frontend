@@ -186,6 +186,19 @@ const RepositoryDetails = () => {
             commit.commitId,
             ""
         );
+
+        // Scroll to the files section
+        setTimeout(() => {
+            const filesSection =
+                document.getElementById("repository-files-section");
+
+            if (filesSection) {
+                filesSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        }, 100);
     };
 
 
@@ -510,7 +523,7 @@ const RepositoryDetails = () => {
             {/* FILES */}
             {/* -------------------------------------- */}
 
-            <div className="files-section">
+            <div className="files-section" id="repository-files-section">
 
                 <h2>
                     {selectedCommit
@@ -524,7 +537,7 @@ const RepositoryDetails = () => {
                 <div className="file-path">
 
                     <strong>
-                        📁{" "}
+                        <i className="fa-solid fa-folder"></i>{" "}
                         {currentPath || "root"}
                     </strong>
 
@@ -591,15 +604,17 @@ const RepositoryDetails = () => {
                                 }}
                             >
 
-                                {file.type ===
-                                "folder"
-                                    ? "📁"
-                                    : "📄"}
+                               <i
+                                    className={
+                                        file.type === "folder"
+                                            ? "fa-solid fa-folder file-icon folder-icon"
+                                            : "fa-solid fa-file file-icon"
+                                    }
+                                ></i>
 
-                                {" "}
-
-                                {file.name}
-
+                                <span className="file-name">
+                                    {file.name}
+                                </span>
                             </div>
 
                         ))}
@@ -615,34 +630,51 @@ const RepositoryDetails = () => {
             {/* FILE CONTENT */}
             {/* -------------------------------------- */}
 
-            {selectedFile && (
+            {selectedCommit && (
 
-                <div
-                    className="file-content-section"
-                >
+                <div className="commit-view-banner">
 
-                    <div
-                        className=
-                            "file-content-header"
-                    >
+                    <div className="commit-view-info">
 
-                        <h2>
-                            📄{" "}
-                            {selectedFile.name}
-                        </h2>
+                        <div className="commit-view-title">
+                            <span className="commit-view-icon">
+                                <i className="fa-solid fa-code-commit"></i>
+                            </span>
 
-                        <span>
-                            {selectedFile.path}
-                        </span>
+                            <div>
+                                <strong>
+                                    Viewing commit
+                                </strong>
+
+                                <h3>
+                                    {selectedCommit.message}
+                                </h3>
+                            </div>
+                        </div>
+
+                        <div className="commit-view-meta">
+
+                            <span>
+                                {selectedCommit.commitId}
+                            </span>
+
+                            <span>
+                                {new Date(
+                                    selectedCommit.date
+                                ).toLocaleString()}
+                            </span>
+
+                        </div>
 
                     </div>
 
 
-                    <pre
-                        className="file-content"
+                    <button
+                        className="back-current-btn"
+                        onClick={backToCurrentRepository}
                     >
-                        {selectedFile.content}
-                    </pre>
+                        ← Back to current repository
+                    </button>
 
                 </div>
 
@@ -695,8 +727,7 @@ const RepositoryDetails = () => {
                                             <strong>
                                                 {
                                                     commit
-                                                        .author
-                                                        ?.username ||
+                                                        .author?.username ||
                                                     "Unknown user"
                                                 }
                                             </strong>
@@ -727,6 +758,7 @@ const RepositoryDetails = () => {
 
 
                                         <button
+                                            className="view-commit-btn"
                                             onClick={() =>
                                                 openCommit(
                                                     commit

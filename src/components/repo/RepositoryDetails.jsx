@@ -462,7 +462,7 @@ const RepositoryDetails = () => {
                             {selectedFile.name}
                         </h2>
 
-                        <button
+                        <button className="close-button"
                             onClick={() => setSelectedFile(null)}
                         >
                             Close

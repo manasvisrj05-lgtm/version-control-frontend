@@ -454,6 +454,33 @@ const RepositoryDetails = () => {
                 )}
             </div>
 
+            {selectedFile && (
+                <div className="file-content-section">
+                    <div className="file-content-header">
+                        <h2>
+                            <i className="fa-solid fa-file"></i>{" "}
+                            {selectedFile.name}
+                        </h2>
+
+                        <button
+                            onClick={() => setSelectedFile(null)}
+                        >
+                            Close
+                        </button>
+                    </div>
+
+                    <div className="file-content-path">
+                        {selectedFile.path}
+                    </div>
+
+                    <pre className="file-content">
+                        <code>
+                            {selectedFile.content}
+                        </code>
+                    </pre>
+                </div>
+            )}
+
             <div className="commit-section">
                 <h2>
                     Commits

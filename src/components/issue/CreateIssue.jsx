@@ -32,9 +32,7 @@ const CreateIssue = () => {
 
 
     try {
-
       setLoading(true);
-
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/issue/create/${id}`,
         {
@@ -51,66 +49,43 @@ const CreateIssue = () => {
         }
       );
 
-
       const data = await response.json();
-
-
       if (!response.ok) {
         throw new Error(
           data.error || "Failed to create issue."
         );
       }
-
-
       console.log("Issue created:", data);
-
-
       navigate(`/repo/${id}/issues`);
-
-
     } catch (err) {
-
       console.error(
         "Error creating issue:",
         err
       );
-
       setError(err.message);
-
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
 
   return (
     <div className="create-issue-page">
-
       <div className="create-issue-container">
-
         <h1>Create new issue</h1>
-
         <p>
           Report a bug or suggest an improvement.
         </p>
-
-
         {error && (
           <div className="issue-error">
             {error}
           </div>
         )}
 
-
         <form onSubmit={handleCreateIssue}>
-
           <label>
             Title
           </label>
-
           <input
             type="text"
             placeholder="Title"
@@ -120,11 +95,9 @@ const CreateIssue = () => {
             }
           />
 
-
           <label>
             Description
           </label>
-
           <textarea
             placeholder="Describe the issue..."
             value={description}
@@ -133,9 +106,7 @@ const CreateIssue = () => {
             }
           />
 
-
           <div className="create-issue-actions">
-
             <button
               type="button"
               onClick={() =>
@@ -153,13 +124,9 @@ const CreateIssue = () => {
                 ? "Creating..."
                 : "Create issue"}
             </button>
-
           </div>
-
         </form>
-
       </div>
-
     </div>
   );
 };

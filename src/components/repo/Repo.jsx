@@ -142,7 +142,7 @@ const Repo = () => {
                         <p>{repo.description}</p>
 
                         <p>
-                            ⭐ starred
+                             starred
                         </p>
                         </div>
                     ))

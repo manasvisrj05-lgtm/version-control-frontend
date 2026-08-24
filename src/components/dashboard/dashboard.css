@@ -157,22 +157,18 @@ body {
 
 #dashboard li:hover {
   background: #1c2128;
-
   border-color: #30363d;
 }
 
 #dashboard li p {
   margin: 0;
-
   color: #c9d1d9;
-
   font-size: 14px;
 }
 
 #dashboard main > p,
 #dashboard aside > p {
   color: #8b949e;
-
   font-size: 14px;
 }
 
@@ -186,7 +182,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #30363d;
-
   border-radius: 10px;
 }
 

@@ -1,6 +1,3 @@
-/* ================================
-   Repository Details Page
-================================ */
 
 .repository-page {
     min-height: calc(100vh - 120px);
@@ -8,11 +5,6 @@
     color: #e6edf3;
     padding: 40px 8%;
 }
-
-
-/* ================================
-   Repository Header
-================================ */
 
 .repository-header {
     display: flex;
@@ -35,11 +27,6 @@
     font-size: 15px;
 }
 
-
-/* ================================
-   Visibility
-================================ */
-
 .repository-header span {
     display: inline-block;
     padding: 4px 10px;
@@ -48,11 +35,6 @@
     color: #8b949e;
     font-size: 12px;
 }
-
-
-/* ================================
-   Issues Button
-================================ */
 
 .repository-header button {
     padding: 8px 16px;
@@ -70,11 +52,6 @@
     border-color: #8b949e;
 }
 
-
-/* ================================
-   Files Section
-================================ */
-
 .files-section {
     margin-top: 30px;
 }
@@ -84,11 +61,6 @@
     color: #e6edf3;
     font-size: 24px;
 }
-
-
-/* ================================
-   Current Path
-================================ */
 
 .file-path {
     display: flex;
@@ -108,11 +80,6 @@
     color: #54aeff;
 }
 
-
-/* ================================
-   Back Button
-================================ */
-
 .file-path button {
     background: #21262d;
     color: #e6edf3;
@@ -128,22 +95,12 @@
     border-color: #8b949e;
 }
 
-
-/* ================================
-   File List
-================================ */
-
 .file-list {
     border: 1px solid #30363d;
     border-radius: 6px;
     overflow: hidden;
     background: #0d1117;
 }
-
-
-/* ================================
-   Individual File / Folder
-================================ */
 
 .file-item {
     display: flex;
@@ -165,11 +122,6 @@
     background: #161b22;
 }
 
-
-/* ================================
-   File / Folder Icons
-================================ */
-
 .file-icon {
     width: 18px;
     text-align: center;
@@ -188,9 +140,6 @@
     color: #8b949e;
 }
 
-
-/* If icons are directly inside .file-item */
-
 .file-item > i {
     width: 18px;
     text-align: center;
@@ -204,29 +153,14 @@
     color: #8b949e;
 }
 
-
-/* ================================
-   File Name
-================================ */
-
 .file-name {
     color: #e6edf3;
     font-size: 14px;
 }
 
-
-/* ================================
-   File Content Section
-================================ */
-
 .file-content-section {
     margin-top: 30px;
 }
-
-
-/* ================================
-   File Content Header
-================================ */
 
 .file-content-header {
     margin-bottom: 10px;
@@ -246,11 +180,6 @@
     color: #8b949e;
     font-size: 14px;
 }
-
-
-/* ================================
-   Actual File Content
-================================ */
 
 .file-content {
     background: #0d1117;
@@ -284,11 +213,6 @@
     white-space: pre-wrap;
 }
 
-
-/* =================================================
-   COMMIT SECTION
-================================================= */
-
 .commit-section {
     margin-top: 40px;
 }
@@ -299,21 +223,11 @@
     font-size: 24px;
 }
 
-
-/* =================================================
-   COMMIT LIST
-================================================= */
-
 .commit-list {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-
-
-/* =================================================
-   COMMIT CARD
-================================================= */
 
 .commit-card {
     display: flex;
@@ -336,11 +250,6 @@
     background: #1c2128;
     border-color: #484f58;
 }
-
-
-/* =================================================
-   COMMIT MESSAGE
-================================================= */
 
 .commit-card h3 {
     margin: 0 0 8px;
@@ -365,11 +274,6 @@
     font-size: 11px;
 }
 
-
-/* =================================================
-   COMMIT INFORMATION
-================================================= */
-
 .commit-info {
     display: flex;
     align-items: center;
@@ -382,9 +286,6 @@
     font-size: 12px;
 }
 
-
-/* Commit ID */
-
 .commit-info span:first-child {
     font-family: monospace;
     color: #58a6ff;
@@ -395,37 +296,21 @@
     word-break: break-all;
 }
 
-
-/* Date */
-
 .commit-info span:last-child {
     color: #8b949e;
 }
 
-
-/* =================================================
-   VIEW COMMIT BANNER
-================================================= */
-
 .commit-view-banner {
     margin: 24px 0;
     padding: 18px 20px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 20px;
-
     background: #161b22;
     border: 1px solid #30363d;
     border-radius: 8px;
 }
-
-
-/* =================================================
-   COMMIT VIEW INFORMATION
-================================================= */
 
 .commit-view-info {
     min-width: 0;
@@ -440,16 +325,12 @@
 .commit-view-icon {
     width: 34px;
     height: 34px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 50%;
-
     background: #1f6feb;
     color: #ffffff;
-
     font-size: 16px;
 }
 
@@ -459,30 +340,24 @@
 
 .commit-view-title strong {
     display: block;
-
     font-size: 13px;
     font-weight: 600;
-
     color: #8b949e;
 }
 
 .commit-view-title h3 {
     margin: 2px 0 0;
-
     font-size: 18px;
     font-weight: 600;
-
     color: #e6edf3;
 }
 
 .commit-view-meta {
     margin-top: 8px;
     margin-left: 46px;
-
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
-
     color: #8b949e;
     font-size: 12px;
 }
@@ -492,25 +367,15 @@
     color: #58a6ff;
 }
 
-
-/* =================================================
-   VIEW COMMIT BUTTON
-================================================= */
-
 .view-commit-btn {
     padding: 6px 14px;
-
     border: 1px solid #30363d;
     border-radius: 6px;
-
     background: #21262d;
     color: #e6edf3;
-
     font-size: 13px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background-color 0.15s ease,
         border-color 0.15s ease,
@@ -528,27 +393,16 @@
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-
-/* =================================================
-   BACK TO CURRENT REPOSITORY BUTTON
-================================================= */
-
 .back-current-btn {
     flex-shrink: 0;
-
     padding: 7px 14px;
-
     border: 1px solid #30363d;
     border-radius: 6px;
-
     background: #21262d;
     color: #e6edf3;
-
     font-size: 14px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background-color 0.15s ease,
         border-color 0.15s ease,
@@ -566,60 +420,41 @@
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-
-/* =================================================
-   LOADING / ERROR
-================================================= */
-
 .repository-page > h2 {
     color: #e6edf3;
 }
 
-
-/* =================================================
-   MOBILE
-================================================= */
-
 @media (max-width: 700px) {
-
     .repository-page {
         padding: 30px 20px;
     }
-
     .repository-header {
         flex-direction: column;
         gap: 20px;
     }
-
     .repository-header h1 {
         font-size: 25px;
     }
-
     .repository-header button {
         align-self: flex-start;
     }
-
     .commit-view-banner {
         align-items: flex-start;
         flex-direction: column;
     }
-
     .back-current-btn {
         width: 100%;
     }
-
     .commit-card {
         align-items: flex-start;
         flex-direction: column;
         gap: 20px;
     }
-
     .commit-info {
         width: 100%;
         justify-content: space-between;
         align-items: flex-start;
     }
-
     .commit-info span:first-child {
         max-width: 100%;
         word-break: break-all;
